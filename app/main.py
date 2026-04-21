@@ -5,7 +5,10 @@ import uvicorn
 
 app = FastAPI()
 
-delay_seconds = float(os.getenv("DELAY_MS", "0"))/1000
+try:
+    delay_seconds = float(os.getenv("DELAY_MS", "0")) / 1000
+except ValueError:
+    delay_seconds = 0.0
 
 @app.get("/health")
 async def health():
